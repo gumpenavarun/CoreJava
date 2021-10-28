@@ -9,4 +9,5 @@ public abstract class  AbstractClass {
 		System.out.println("M2 Method from Abstract class");
 	}
 
+	
 }
