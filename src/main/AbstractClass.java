@@ -1,4 +1,4 @@
-package com.java.core;
+package main;
 
 public abstract class  AbstractClass {
 	final String S="Varun Chakravarthy";

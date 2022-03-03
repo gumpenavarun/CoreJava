@@ -1,12 +1,14 @@
-package com.java.core;
+package main;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -31,7 +33,9 @@ public class Package extends AbstractClass {
 		Package obj2 = new Package(56, "Steve");
 		System.out.println("Object 1 -> " + obj1.name + " " + obj1.age);
 		System.out.println("Object 2 -> " + obj2.name + " " + obj2.age + "\n");
-
+		
+		
+ 
 		obj2.m1();
 		obj2.m2();
 
@@ -107,30 +111,48 @@ public class Package extends AbstractClass {
 		firstName.add("Element 2");
 		firstName.add("Element 3");
 		printList(firstName);
-		
+
 		List<Integer> numList = new ArrayList<Integer>();
 		numList.add(23);
 		numList.add(20);
 		printList(numList);
-		
-		//Print list in reverse order
+
+		// Print list in reverse order
 //		for (int i = 1; i <= firstName.size(); i++) {
 //			System.out.println(firstName.get(firstName.size() - i));
 //
 //		}
-		
-		String ss= "varun chakravarthy";
+
+		String ss = "varun chakravarthy";
 		findDuplicateCharsWithCount(ss);
+		// combo();
+		int nn = 9;
+		obj1.calNums(nn);
+
+		/*
+		 * int div=6066; System.out.println(obj1.divide(div));
+		 */
+		int arr[] = {0,1, 2, 3, 4, 5,6,7,8,9};
+        int r = 4;
+        int n = arr.length;
+		//printCombination(arr, n, r);
+       // npr(10, 4);
+        reverseString();
+        ArrayList<Integer >list = new ArrayList<Integer>();
 		
-		
-		
+        list.add(10);
+        list.add(20); 
+        list.add(10);
+		 
+        Optional<Integer> oi =obj1.dupIntSum(list);
+        System.out.println(oi);
+        
 	}
-	
+
 	public static <E> void printList(List<E> Object) {
 		Object.forEach(System.out::println);
-		
+
 	}
-	
 
 	@Override
 	void m1() {
@@ -267,4 +289,146 @@ public class Package extends AbstractClass {
 		System.out.println(total);
 	}
 
+	int divide(int num) {
+		// If number is negative, make it positive
+		if (num < 0)
+			return divide(-num);
+
+		// Base cases
+		if (num == 0 || num == 9)
+			return 1;
+
+		// Recur for ( num / 10 - 2 * num % 10 )
+		return divide(num / 10 - 2 * (num - num / 10 * 10));
+	}
+
+	static void combo() {
+		int arOne[] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+		int count = 0;
+
+		for (int i = 0; i < arOne.length; i++) {
+			for (int j = 0; j < arOne.length; j++) {
+				for (int j2 = 0; j2 < arOne.length; j2++) {
+					for (int k = 0; k < arOne.length; k++) {
+						int sum = arOne[i] + arOne[j] + arOne[j2] + arOne[k];
+						if (sum != 0 && sum % 9 == 0) {
+							System.out.println(arOne[i] + " " + arOne[j] + " " + arOne[j2] + " " + arOne[k]);
+							count++;
+						}
+					}
+				}
+				// System.out.println((arOne[i]+arTwo[i]));
+			}
+		}
+		System.out.println("Total Numbers for sum of 9 by 4 Digits is: " + count);
+	}
+
+	List<Integer> calNums(Integer n) {
+
+		/*
+		 * if (n>0) calNums(n - 1); System.out.println(n+" ");
+		 */
+
+		List<Integer> numList = new ArrayList<Integer>();
+		for (int i = 1; i <= n; i++) {
+			numList.add(i);
+		}
+		System.out.println("Num List " + numList);
+		return numList;
+	}
+
+	static void combinationUtil(int arr[], int data[], int start, int end, int index, int r) {
+// Current combination is ready to be printed, print it
+		int tt=0;
+		if (index == r) {
+			for (int j = 0; j < r; j++)
+				//System.out.print(data[j] + " ");
+			for(int a:data) {
+				tt=tt+a;
+			}
+			//System.out.println((tt%9==0));
+			if(tt%9==0) {
+				System.out.println(Arrays.toString(data)+ " ");
+			}
+			//System.out.println("");
+			return;
+		}
+
+// replace index with all possible elements. The condition
+// "end-i+1 >= r-index" makes sure that including one element
+// at index will make a combination with remaining elements
+// at remaining positions
+		for (int i = start; i <= end && end - i + 1 >= r - index; i++) {
+			data[index] = arr[i];
+			combinationUtil(arr, data, i + 1, end, index + 1, r);
+		}
+	}
+
+// The main function that prints all combinations of size r
+// in arr[] of size n. This function mainly uses combinationUtil()
+	static void printCombination(int arr[], int n, int r) {
+// A temporary array to store all combination one by one
+		int data[] = new int[r];
+
+// Print all combination using temporary array 'data[]'
+		combinationUtil(arr, data, 0, n - 1, 0, r);
+	}
+	
+	static void npr(int n, int r) {
+		int ncr = (fact(n)) / (fact(r)*fact(n-r));
+		
+	      System.out.println("\nnPr = " +ncr);
+		
+	   }
+	   public static int fact(int num)
+	   {
+	      int fact=1;
+	      for(int i=1; i<=num; i++)
+	         fact *= i;
+	      return fact;
+	   }
+	
+
+
+	public static void reverseString() {
+		String s= "varun";
+		String rev="";
+		char c[] = s.toLowerCase().toCharArray();
+		StringBuffer newString = new StringBuffer();
+		System.out.println("String before revese "+s);
+		
+		for (int i = c.length-1; i >=0 ; i--) {
+			if(c[i]!=' ') {
+				newString.append(c[i]);
+			}
+			 
+		}
+		int i=s.length();
+		while(i>0) {
+			System.out.print(s.charAt(i-1));
+			i--;
+		}
+		
+		System.out.println("\nReversed String "+newString);
+		for (int j = s.length(); j>0; j--) {
+			rev = rev+(s.charAt(j-1));
+		}
+		System.out.println("Reversed String is "+rev);
+		
+	}
+	
+	public Optional<Integer> dupIntSum(List<Integer> list){
+			//list = new ArrayList<Integer>();
+			/*
+			 * dupList.add(10); dupList.add(20); dupList.add(10);
+			 */
+			 
+		Optional<Integer>  dupItems = list.stream().distinct().reduce((a,b)-> (a+b));
+		System.out.println(dupItems);
+		return dupItems;
+		
+	}
 }
+	
+
+
