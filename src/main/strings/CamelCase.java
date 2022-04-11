@@ -1,7 +1,11 @@
 package main.strings;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.IntStream;
+
+import main.Package;
 
 public class CamelCase {
 	
@@ -12,7 +16,6 @@ public class CamelCase {
 //		s= ss.split(" ");
 //		camelCaseLine(s);
 		
-		
 		String fullName = "varun chakravarthy gumpena is good java developer and working as a software engineer";
 		String[] temp;
 		temp = fullName.split(" ");
@@ -20,7 +23,8 @@ public class CamelCase {
 		//CamelCase.camelCaseLine(temp);
 		System.out.println("---------");
 		//CamelCase.firstAndLastCapital(temp);
-		removeElement();
+		//removeElement();
+		stringArray();
 		
 	}
 	public static void camelCaseLine(String[] s) {
@@ -53,21 +57,46 @@ public class CamelCase {
 	}
 	
 	
+	
+	static class A{
+		static void m1() {
+			System.out.println("M1 from class A");
+		}
+		static void m2() {
+			m1();
+			System.out.println("m2 Method from Class A");
+		}
+	}
+	
 	public static void removeElement() {
 		List<String> removeList = new ArrayList<String>();
-		removeList.add("a");
-		removeList.add("b");
-		removeList.add("c");
+		removeList.add("aa");
+		removeList.add("baa");
+		removeList.add("ca");
 		
 		for (int i = 0; i < removeList.size(); i++) {
 			
-			if(removeList.get(i).contains("a")) {
+			if(removeList.get(i).contains("aaaa")) {
 				removeList.remove(i);
 			}
 			System.out.println(removeList.get(i));
 		}
-		
-		
 	}
+	
+	public static void stringArray() {
+		int [] myIntArray = IntStream.of(12,25,36,85,28,96,47).sorted().toArray(); 
+		int [] myInt = IntStream.range(1, 100).toArray();
+		String[] sArray = new String[5];
+		sArray[0]= "hi";
+		sArray[1] = sArray[0].toUpperCase();
+		sArray[2] = sArray[0].replace("hi", "Hello");
+		sArray[3] = sArray[0].substring(1);
+		for(String s: sArray) {
+			System.out.println(s);
+		}
+		System.out.println(Arrays.toString(myIntArray));
+		System.out.println((myInt[56]));
+	}
+	
 
 }
